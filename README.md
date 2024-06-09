@@ -27,3 +27,13 @@ Smaller version will be easier to work with. I.e. Phi-3-mini-4k-instruct-q4.gguf
 ### Libraries (LangChain and ChainLit ecosystems)
 
 pip install numpy jupyter pandas sentencepiece pypdf  chainlit langchain langchain-core langchain-community langchain-cli
+
+### Sample Data
+
+"Chinook" sample schema is used from https://github.com/lerocha/chinook-database
+
+Chinook data model represents a digital media store, including tables for artists, albums, media tracks, invoices and customers.
+
+This is a good test for Joins, Aggregates and synonyms . 
+
+![img.png](docs/chinook_db_schema.png)
