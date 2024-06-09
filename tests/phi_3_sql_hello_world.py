@@ -30,6 +30,8 @@ This query will run on a database whose schema is represented in this string:
 ### Answer
 Given the database schema, here is the SQL query that answers [QUESTION]{question}[/QUESTION]
 [SQL]
+
+--salesperson is same as Employee
 """
 
 db_file_path = '../data/Chinook_Sqlite.sqlite'
@@ -67,5 +69,15 @@ for entity in entities:
     output = llm.invoke(inp)
     end_time = time.time()
     query_manager.insert_query(entity=entity, start_time=start_time, end_time=end_time, llm_output=output,
-                               task_done=False, extracted_query=None)
+                               task_done=False, extracted_query=None, llm_input=inp, llm_question=qry)
+
+    start_time = time.time()
+    qry = "How many " + entity + " exist?"
+    logger.info(qry)
+
+    inp = prompt.format(question=qry, db_schema=db_schema_str)
+    output = llm.invoke(inp)
+    end_time = time.time()
+    query_manager.insert_query(entity=entity, start_time=start_time, end_time=end_time, llm_output=output,
+                               task_done=False, extracted_query=None, llm_input=inp, llm_question=qry)
     #print(output)
