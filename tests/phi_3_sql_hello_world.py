@@ -6,9 +6,6 @@ from langchain_community.utilities.sql_database import SQLDatabase
 from sqlalchemy import create_engine
 from dao import QueryManager
 
-# create QueryManager instance
-query_manager = QueryManager("sql_stats.sqlite")
-
 logging.basicConfig(
     format='%(asctime)s %(levelname)-8s %(message)s',
     level=logging.INFO,
