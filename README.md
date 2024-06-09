@@ -37,3 +37,6 @@ Chinook data model represents a digital media store, including tables for artist
 This is a good test for Joins, Aggregates and synonyms . 
 
 ![img.png](docs/chinook_db_schema.png)
+
+### Approach for prompt 
+This was the source of Prompt text : https://github.com/defog-ai/sqlcoder/blob/main/defog_sqlcoder_colab.ipynb
