@@ -14,7 +14,7 @@ class QueryManager:
                         Entity TEXT NOT NULL,
                         start_time REAL,
                         end_time REAL,
-                        query_text TEXT,
+                        llm_output TEXT,
                         extracted_query TEXT,
                         task_done BOOLEAN DEFAULT FALSE
                     )
