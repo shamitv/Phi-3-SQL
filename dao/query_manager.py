@@ -1,4 +1,5 @@
 # Python file: query_manager.py
+import datetime
 import sqlite3
 
 
@@ -40,21 +41,28 @@ class QueryManager:
         self.conn.commit()
         return cur.lastrowid
 
+    def convert_to_timestamps(query_result):
+        query_result['start_time'] = datetime.datetime.fromtimestamp(query_result['start_time'])
+        query_result['end_time'] = datetime.datetime.fromtimestamp(query_result['end_time'])
+        return query_result
+
     def get_unfinished_task(self):
         cur = self.conn.cursor()
         query = """
-            SELECT * FROM queries 
-            WHERE task_done = 0 
-            ORDER BY ID ASC 
-            LIMIT 1;    
-        """
+                SELECT * FROM queries 
+                WHERE task_done = 0 
+                ORDER BY ID ASC 
+                LIMIT 1;    
+            """
         cur.execute(query)
         row = cur.fetchone()
 
         if row is None:
             return None
         col_names = [desc[0] for desc in cur.description]
-        return dict(zip(col_names, row))
+        result = dict(zip(col_names, row))
+
+        return self.convert_to_timestamps(result)
 
     def get_by_id(self, id):
         cur = self.conn.cursor()
@@ -65,4 +73,6 @@ class QueryManager:
         if row is None:
             return None
         col_names = [desc[0] for desc in cur.description]
-        return dict(zip(col_names, row))
+        result = dict(zip(col_names, row))
+
+        return self.convert_to_timestamps(result)
