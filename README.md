@@ -19,9 +19,11 @@ For other OS, follow instructions on GitHub / PyPi page of library.
 Download gguf file from https://huggingface.co/microsoft/Phi-3-mini-4k-instruct-gguf/tree/main 
 ![img.png](docs/Phi-3-repo-screenshot.png)
 
-Place this in "models" dir
+Place gguf file in "models" dir
 
 Smaller version will be easier to work with. I.e. Phi-3-mini-4k-instruct-q4.gguf (2.x GB)
 
 
+### Libraries (LangChain and ChainLit ecosystems)
 
+pip install numpy jupyter pandas sentencepiece pypdf  chainlit langchain langchain-core langchain-community langchain-cli
