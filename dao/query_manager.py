@@ -14,6 +14,8 @@ class QueryManager:
                         Entity TEXT NOT NULL,
                         start_time REAL,
                         end_time REAL,
+                        llm_question TEXT,
+                        llm_input TEXT,
                         llm_output TEXT,
                         extracted_query TEXT,
                         task_done BOOLEAN DEFAULT FALSE
@@ -24,14 +26,17 @@ class QueryManager:
     def __del__(self):
         self.conn.close()
 
-    def insert_query(self, entity, start_time, end_time, llm_output, extracted_query, task_done):
+    def insert_query(self, entity, start_time, end_time, llm_output, extracted_query, task_done, llm_question,
+                     llm_input):
         cur = self.conn.cursor()
         query = """
-            INSERT INTO queries 
-            (Entity, start_time, end_time, llm_output, extracted_query, task_done)
-            VALUES (?, ?, ?, ?, ?, ?);
-        """
-        cur.execute(query, (entity, start_time, end_time, llm_output, extracted_query, task_done))
+                INSERT INTO queries 
+                (Entity, start_time, end_time, llm_output, extracted_query, task_done, llm_question, llm_input)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+            """
+        cur.execute(query,
+                    (entity, start_time, end_time, llm_output, extracted_query,
+                     task_done, llm_question, llm_input))
         self.conn.commit()
         return cur.lastrowid
 
