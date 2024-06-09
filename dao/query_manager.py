@@ -41,7 +41,7 @@ class QueryManager:
         self.conn.commit()
         return cur.lastrowid
 
-    def convert_to_timestamps(query_result):
+    def convert_to_timestamps(self,query_result):
         query_result['start_time'] = datetime.datetime.fromtimestamp(query_result['start_time'])
         query_result['end_time'] = datetime.datetime.fromtimestamp(query_result['end_time'])
         return query_result
@@ -61,8 +61,8 @@ class QueryManager:
             return None
         col_names = [desc[0] for desc in cur.description]
         result = dict(zip(col_names, row))
-
-        return self.convert_to_timestamps(result)
+        result2 = self.convert_to_timestamps(result)
+        return result2
 
     def get_by_id(self, id):
         cur = self.conn.cursor()
@@ -74,5 +74,5 @@ class QueryManager:
             return None
         col_names = [desc[0] for desc in cur.description]
         result = dict(zip(col_names, row))
-
-        return self.convert_to_timestamps(result)
+        result2 = self.convert_to_timestamps(result)
+        return result2
